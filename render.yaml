@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: openai-status-monitor
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: POLL_INTERVAL
+        value: 60
+      - key: STATUS_FEED_URL
+        value: https://status.openai.com/history.atom
